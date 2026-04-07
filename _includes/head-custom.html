@@ -8,10 +8,23 @@
 
 <!-- end custom head snippets -->
 
-
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    mermaid.initialize({ startOnLoad: true });
+  window.addEventListener("load", () => {
+    mermaid.initialize({ startOnLoad: false });
+
+    document.querySelectorAll("pre code.language-mermaid").forEach((block) => {
+      const parent = block.parentElement;
+      const graphDefinition = block.textContent;
+
+      const div = document.createElement("div");
+      div.className = "mermaid";
+      div.textContent = graphDefinition;
+
+      parent.replaceWith(div);
+    });
+
+    mermaid.init();
   });
 </script>
